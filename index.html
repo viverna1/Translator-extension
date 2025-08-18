@@ -1,1 +1,38 @@
-index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Переводчик</title>
+    <link rel="icon" href="/icons/logo-48.png" type="image/png">
+    <link rel="shortcut icon" href="/icons/logo-48.png" type="image/png">
+    
+    <!-- Будет видно скриптам -->
+    <meta name="author" content="v-v">
+    <meta name="description" content="Рассширение для браузера, переводчик">
+    <meta name="keywords" content="переводчик,перевод,браузер,расширение">
+
+    <!-- Подключение CSS файла -->
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <div class="texture-wrapper"></div>
+
+    <header id="main-header">
+        <img src="icons/logo.png" alt="Логотип" class="logo-icon" width="50" height="50">
+        
+        <h1 id="text">Переводчик</h1>
+    </header>
+
+    <main>
+        <form id="translator-form">
+            <label for="to-translate">Русский</label>
+            <input type="text" id="to-translate" placeholder="Введите текст" autofocus>
+            <label for="translation">Перевод</label>
+            <input type="text" id="translation" placeholder="Введите текст">
+        </form>
+    </main>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>

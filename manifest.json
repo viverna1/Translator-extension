@@ -22,8 +22,8 @@
 
   "content_scripts": [
     {
-      "matches": ["*://*/*"],
-      "js": ["testplugin.js"]
+      "matches": ["<all_urls>"],
+      "js": ["static/script.js"]
     }
   ]
 }
