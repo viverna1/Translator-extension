@@ -1,32 +1,22 @@
-let timer;
-let timeLeft = 1; // 1 секунда
+let translationTimer;
+const TRANSLATION_DELAY = 500; // 100ms = 0.1 секунды
 
 function translateText(text) {
-    var el = document.getElementById('translation');
-    el.value = text; // Копируем переданный текст в поле перевода
+    document.getElementById('translation').value = text;
 }
 
-function startTimer(inputText) {
-  clearInterval(timer); // Очищаем предыдущий таймер
-  timeLeft = 1; // Сбрасываем время
-  
-  timer = setInterval(() => {
-    if (timeLeft <= 0) {
-      clearInterval(timer);
-      translateText(inputText); // Передаем текст для перевода
-      return;
+function startTranslationTimer(inputText) {
+    // Сбрасываем предыдущий таймер
+    if (translationTimer) {
+        clearTimeout(translationTimer);
     }
-    timeLeft--;
-  }, 1000);
-}
-
-// Сброс таймера
-function resetTimer() {
-  clearInterval(timer); // Останавливаем таймер
-  timeLeft = 1; // Возвращаем начальное значение
-  console.log("Таймер сброшен");
+    
+    // Запускаем новый таймер
+    translationTimer = setTimeout(() => {
+        translateText(inputText);
+    }, TRANSLATION_DELAY);
 }
 
 document.getElementById('to-translate').addEventListener('input', function(e) {
-    startTimer(e.target.value); // Передаем текущее значение поля ввода
+    startTranslationTimer(e.target.value);
 });

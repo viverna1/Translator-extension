@@ -1,38 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Переводчик</title>
-    <link rel="icon" href="/icons/logo-48.png" type="image/png">
-    <link rel="shortcut icon" href="/icons/logo-48.png" type="image/png">
-    
-    <!-- Будет видно скриптам -->
-    <meta name="author" content="v-v">
-    <meta name="description" content="Рассширение для браузера, переводчик">
-    <meta name="keywords" content="переводчик,перевод,браузер,расширение">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glass Translator</title>
 
-    <!-- Подключение CSS файла -->
-    <link rel="stylesheet" href="/static/style.css">
+    <!-- Иконка сайта -->
+    <link rel="icon" href="icons/logo-48.png" type="image/png">
+
+    <!-- Мета-данные -->
+    <meta name="author" content="v-v">
+    <meta name="description" content="Стильный переводчик с эффектом матового стекла">
+
+    <!-- Основной CSS -->
+    <link rel="stylesheet" href="static/style.css">
+
+    <!-- Шрифт Montserrat -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap">
 </head>
 
 <body>
-    <div class="texture-wrapper"></div>
+    <!-- Фоновые элементы с эффектом -->
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
 
-    <header id="main-header">
-        <img src="icons/logo.png" alt="Логотип" class="logo-icon" width="50" height="50">
-        
-        <h1 id="text">Переводчик</h1>
-    </header>
+    <!-- Основной контейнер приложения -->
+    <div class="container">
 
-    <main>
-        <form id="translator-form">
-            <label for="to-translate">Русский</label>
-            <input type="text" id="to-translate" placeholder="Введите текст" autofocus>
-            <label for="translation">Перевод</label>
-            <input type="text" id="translation" placeholder="Введите текст">
-        </form>
-    </main>
+        <!-- Шапка приложения -->
+        <header class="header">
+            <!-- Логотип и название -->
+            <div class="logo-container">
+                <img src="icons/logo.png" alt="Логотип" class="logo-icon" width="48">
+                <h1 class="title">Translator</h1>
+            </div>
 
-    <script src="/static/script.js"></script>
+            <!-- Переключение языков -->
+            <div class="language-switcher">
+                <!-- Язык исходного текста -->
+                <select id="source-lang">
+                    <option value="en">English</option>
+                    <option value="ru" selected>Русский</option>
+                    <option value="ua">український</option>
+                </select>
+
+                <!-- Кнопка обмена языков -->
+                <div class="swap-btn">⇄</div>
+
+                <!-- Язык перевода -->
+                <select id="target-lang">
+                    <option value="en" selected>English</option>
+                    <option value="ru">Русский</option>
+                    <option value="ua">український</option>
+                </select>
+            </div>
+        </header>
+
+        <!-- Основная часть переводчика -->
+        <main class="translator-box">
+
+            <!-- Ввод текста -->
+            <div class="input-section">
+                <textarea id="to-translate" placeholder="Введите текст..." autofocus></textarea>
+
+                <!-- Подвал блока ввода -->
+                <div class="input-footer">
+                    <span class="char-count">0</span> <!-- Счетчик символов -->
+                    <button class="clear-btn">×</button> <!-- Очистка текста -->
+                </div>
+            </div>
+
+            <!-- Результат перевода -->
+            <div class="output-section">
+                <textarea id="translation" placeholder="Перевод" readonly></textarea>
+
+                <!-- Подвал блока вывода -->
+                <div class="output-footer">
+                    <button class="copy-btn">Копировать</button> <!-- Копирование текста -->
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Скрипт приложения -->
+    <script src="static/script.js"></script>
 </body>
 </html>
