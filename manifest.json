@@ -1,0 +1,29 @@
+{
+  "manifest_version": 2,
+  "name": "Translator",
+  "description": "Переводит текст",
+  "version": "1.0.0",
+  "homepage_url": "https://github.com/viverna1",
+  "icons": {
+    "32": "icons/logo-32.png",
+    "48": "icons/logo-48.png"
+  },
+  "applications": {
+    "gecko": {
+      "id": "translator@viverna.dev"
+    }
+  },
+
+  "browser_action": {
+    "default_icon": "icons/logo-32.png",
+    "default_title": "Переводчик",
+    "default_popup": "index.html"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "js": ["testplugin.js"]
+    }
+  ]
+}
