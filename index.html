@@ -31,7 +31,7 @@
         <select id="language-select">
             <option value="en" selected>English</option>
             <option value="ru">Русский</option>
-            <option value="ua">Українська</option>
+            <option value="uk">Українська</option>
             <option value="de">Deutsch</option>
             <option value="fr">Français</option>
             <option value="es">Español</option>
@@ -77,27 +77,25 @@
     <main id="settings" style="display: none;">
         <form>
             <fieldset>
-                <legend>Перевод</legend>
-        
-                <!-- выбор языка ввода -->
-                <label for="input-language">Язык ввода:</label>
-                <select id="input-language">
-                    <option value="auto" selected>auto</option>
-                    <option value="en">English</option>
+                <legend>Перевод</legend>        
+                <!-- выбор языка для перевода -->
+                <label for="settings-language-select">Язык перевода:</label>
+                <select id="settings-language-select">
+                    <option value="en" selected>English</option>
                     <option value="ru">Русский</option>
-                    <option value="ua">Українська</option>
+                    <option value="uk">Українська</option>
                     <option value="de">Deutsch</option>
                     <option value="fr">Français</option>
                     <option value="es">Español</option>
                 </select>
                 <br>
-        
-                <!-- выбор языка для перевода -->
-                <label for="settings-language-select">Язык перевода:</label>
-                <select id="settings-language-select">
+                
+                <!-- язык по умолчанию -->
+                <label for="default-language">Дополнительный язык:</label>
+                <select id="default-language">
                     <option value="en">English</option>
-                    <option value="ru">Русский</option>
-                    <option value="ua">Українська</option>
+                    <option value="ru" selected>Русский</option>
+                    <option value="uk">Українська</option>
                     <option value="de">Deutsch</option>
                     <option value="fr">Français</option>
                     <option value="es">Español</option>
