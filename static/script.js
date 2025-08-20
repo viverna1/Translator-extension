@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
     /* ========== Textarea ========== */
     function adjustTextareaHeight(textarea) {
         textarea.style.height = 'auto';
-        textarea.style.height = textarea.scrollHeight + 'px';
+        textarea.style.height = (textarea.scrollHeight - 30) + 'px';
     }
 
     inputTextarea.addEventListener('input', function() {

@@ -48,7 +48,7 @@ header {
 /* Основная часть */
 main {
     min-width: 300px;
-    min-height: 150px;
+    min-height: 100px;
     flex: 0 1 auto;
     display: flex;
     flex-direction: column;
@@ -69,7 +69,7 @@ main {
 /* Текстовые поля */
 textarea {
     width: 100%;
-    min-height: 50px;
+    min-height: 30px;
     max-height: 200px;
     overflow-y: auto;
     border: none;
@@ -159,12 +159,12 @@ option {
 
 
 
-
-/* ========================== стили для настроек ========================== */
+/* ====================== стили для настроек ====================== */
 #settings {
     display: none;
     flex-direction: column;
     padding: 15px;
     background-color: #1c1b22;
     border-radius: 5px;
+    font-size: 14px;
 }
