@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Минималистичный Select</title>
+    <style>
+        .lang {
+            position: relative;
+            width: 200px;
+        }
+
+        .lang select {
+            width: 100%;
+            padding: 10px 35px 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background: #f8f9fa;
+            appearance: none;
+            cursor: pointer;
+        }
+
+        .lang::after {
+            content: "▼";
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 12px;
+            color: #666;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="lang">
+        <select>
+            <option>Вариант 1</option>
+            <option>Вариант 2</option>
+            <option>Вариант 3</option>
+            <option>Вариант 4</option>
+        </select>
+    </div>
+</body>
+</html>

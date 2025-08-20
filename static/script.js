@@ -20,3 +20,5 @@ function startTranslationTimer(inputText) {
 document.getElementById('to-translate').addEventListener('input', function(e) {
     startTranslationTimer(e.target.value);
 });
+
+
