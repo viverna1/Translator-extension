@@ -25,10 +25,21 @@
 <body>
     <!-- Шапка приложения -->
     <header>
-        <!-- Логотип и название -->
-        <div class="logo-container">
-            <img src="icons/logo.png" alt="Логотип" class="logo-icon">
-            <h1 class="title">Translator</h1>
+        <p class="title">перевести на:</p>
+
+        <!-- язык перевода -->                 
+        <select class="lang">
+            <option value="en" selected>English</option>
+            <option value="ru">Русский</option>
+            <option value="ua">Українська</option>
+            <option value="de">Deutsch</option>
+            <option value="fr">Français</option>
+            <option value="es">Español</option>
+        </select>
+
+        <!-- настройки -->
+        <div class="settings-icon">
+            <i class="fas fa-cog"></i>
         </div>
     </header>
 
@@ -37,27 +48,14 @@
 
         <!-- Ввод текста -->
         <div class="input-section">
-
-            <textarea id="to-translate" placeholder="Введите текст..." autofocus></textarea>
-
-            <!-- Подвал блока ввода -->
-            <div class="input-footer">
-                <!-- язык исходного текста -->
-                <select class="lang">
-                    <option value="en">English</option>
-                    <option value="ru" selected>Русский</option>
-                    <option value="ua">Українська</option>
-                    <option value="de">Deutsch</option>
-                    <option value="fr">Français</option>
-                    <option value="es">Español</option>
-                </select>
-
-                <span class="char-count">0</span> <!-- Счетчик символов -->
-
-                <button class="clear-btn" id="clear-input">
-                    <i class="fas fa-times"></i>
-                </button> <!-- Очистка текста -->
+            <div class="textarea-wrapper">
+                <textarea id="to-translate" placeholder="Введите текст..." autofocus></textarea>
             </div>
+
+
+            <button class="clear-btn" id="clear-input">
+                <i class="fas fa-times"></i>
+            </button> <!-- Очистка текста -->
         </div>
 
         <hr>
@@ -67,25 +65,11 @@
 
             <textarea id="translation" placeholder="Перевод" readonly></textarea>
 
-            <!-- Подвал блока вывода -->
-            <div class="output-footer">
-                <!-- язык перевода -->
-                 
-                <select class="lang">
-                    <option value="en" selected>English</option>
-                    <option value="ru">Русский</option>
-                    <option value="ua">Українська</option>
-                    <option value="de">Deutsch</option>
-                    <option value="fr">Français</option>
-                    <option value="es">Español</option>
-                </select>
+            <button class="copy-btn" id="copy-output">
+                <i class="far fa-copy"></i>
+            </button> <!-- Копирование текста -->
 
-                <button class="copy-btn" id="copy-output">
-                    <i class="far fa-copy"></i>
-                </button> <!-- Копирование текста -->
-
-                <div class="loader" id="loader" style="display: none;"></div>
-            </div>
+            <div class="loader" id="loader" style="display: none;"></div>
         </div>
     </main>
 
