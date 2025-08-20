@@ -25,10 +25,10 @@
 <body>
     <!-- Шапка приложения -->
     <header>
-        <p class="title">перевести на:</p>
+        <h1 id="title">перевести на:</h1>
 
         <!-- язык перевода -->                 
-        <select class="lang">
+        <select id="language-select">
             <option value="en" selected>English</option>
             <option value="ru">Русский</option>
             <option value="ua">Українська</option>
@@ -44,7 +44,7 @@
     </header>
 
     <!-- Основная часть переводчика -->
-    <main>
+    <main id="translator">
 
         <!-- Ввод текста -->
         <div class="input-section">
@@ -71,6 +71,46 @@
 
             <div class="loader" id="loader" style="display: none;"></div>
         </div>
+    </main>
+
+    <!-- Настройки -->
+    <main id="settings" style="display: none;">
+        <form>
+            <fieldset>
+                <legend>Перевод</legend>
+        
+                <!-- выбор языка ввода -->
+                <label for="input-language">Язык ввода:</label>
+                <select id="input-language">
+                    <option value="auto" selected>auto</option>
+                    <option value="en">English</option>
+                    <option value="ru">Русский</option>
+                    <option value="ua">Українська</option>
+                    <option value="de">Deutsch</option>
+                    <option value="fr">Français</option>
+                    <option value="es">Español</option>
+                </select>
+                <br>
+        
+                <!-- выбор языка для перевода -->
+                <label for="settings-language-select">Язык перевода:</label>
+                <select id="settings-language-select">
+                    <option value="en">English</option>
+                    <option value="ru">Русский</option>
+                    <option value="ua">Українська</option>
+                    <option value="de">Deutsch</option>
+                    <option value="fr">Français</option>
+                    <option value="es">Español</option>
+                </select>
+            </fieldset>
+
+            <fieldset>
+                <legend>Внешний вид</legend>
+        
+                <p>123</p>
+            </fieldset>
+        </form>
+        
     </main>
 
     <!-- Скрипт приложения -->

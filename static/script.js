@@ -4,24 +4,43 @@ document.addEventListener('DOMContentLoaded', function() {
     const outputTextarea = document.getElementById('translation');
     const clearButton = document.getElementById('clear-input');
     const copyButton = document.getElementById('copy-output');
-    const languageSelect = document.querySelector('.lang');
+    const languageSelect = document.getElementById('language-select');
     const loader = document.getElementById('loader');
+    const settingsIcon = document.querySelector('.settings-icon');
+    const translatorSection = document.getElementById('translator');
+    const settingsSection = document.getElementById('settings');
+    const title = document.getElementById('title');
+    // Из настроек
+    const settingsLanguageSelect = document.getElementById('settings-language-select');
+    const inputLanguage = document.getElementById('input-language');
     
     // Переменные
     let debounceTimer;
     const debounceDelay = 500; // Задержка перед отправкой запроса
+    var is_settings_open = false;
     
-    // Показ/скрытие кнопок очистки и копирования
+    
+    // Функция после ввода текста
     inputTextarea.addEventListener('input', function() {
+        // изменяем высоту текстового поля
+        adjustTextareaHeight(inputTextarea);
+
         if (inputTextarea.value.trim() !== '') {
-            clearButton.style.display = 'block';
+            clearButton.style.display = 'flex';
             translateText();
         } else {
+            adjustTextareaHeight(outputTextarea);
             clearButton.style.display = 'none';
             outputTextarea.value = '';
             copyButton.style.display = 'none';
         }
     });
+
+    // изменение высоты текстового поля
+    function adjustTextareaHeight(textarea) {
+        textarea.style.height = 'auto'; // Сбрасываем высоту
+        textarea.style.height = (textarea.scrollHeight - 30) + 'px'; // Устанавливаем новую высоту
+    }
     
     // Очистка поля ввода
     clearButton.addEventListener('click', function() {
@@ -33,21 +52,38 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Копирование текста
-    copyButton.addEventListener('click', function() {
-        outputTextarea.select();
-        document.execCommand('copy');
-        
-        // Визуальное подтверждение копирования
-        const originalIcon = copyButton.innerHTML;
-        copyButton.innerHTML = '<i class="fas fa-check"></i>';
-        
-        setTimeout(() => {
-            copyButton.innerHTML = originalIcon;
-        }, 1500);
+    copyButton.addEventListener('click', async function() {
+        try {
+            await navigator.clipboard.writeText(outputTextarea.value);
+    
+            // Визуальное подтверждение копирования
+            const originalIcon = copyButton.innerHTML;
+            copyButton.innerHTML = '<i class="fas fa-check"></i>';
+    
+            setTimeout(() => {
+                copyButton.innerHTML = originalIcon;
+            }, 1500);
+        } catch (err) {
+            console.error('Ошибка копирования: ', err);
+        }
     });
+    
     
     // Изменение языка перевода
     languageSelect.addEventListener('change', function() {
+        // изменение языка перевода в настройках
+        settingsLanguageSelect.value = languageSelect.value;
+
+        if (inputTextarea.value.trim() !== '') {
+            translateText();
+        }
+    });
+    
+    // Изменение языка перевода в настройках
+    settingsLanguageSelect.addEventListener('change', function() {
+        // изменение языка перевода в переводчике
+        languageSelect.value = settingsLanguageSelect.value;
+
         if (inputTextarea.value.trim() !== '') {
             translateText();
         }
@@ -61,103 +97,60 @@ document.addEventListener('DOMContentLoaded', function() {
         if (text === '') {
             outputTextarea.value = '';
             copyButton.style.display = 'none';
+            loader.style.display = 'none';
             return;
         }
         
         // Показываем лоадер
-        loader.style.display = 'block';
+        loader.style.display = 'flex';
+        copyButton.style.display = 'none';
         
         // Очищаем предыдущий таймер
         clearTimeout(debounceTimer);
         
         // Устанавливаем новый таймер
         debounceTimer = setTimeout(() => {
-            // Здесь должен быть реальный API-запрос к сервису перевода
-            // Для демонстрации используем заглушку
-            simulateTranslation(text, targetLang);
+            Translation(text, targetLang);
         }, debounceDelay);
     }
     
-    // Заглушка для имитации перевода (замените на реальный API)
-    function simulateTranslation(text, targetLang) {
-        // Имитация задержки сети
-        setTimeout(() => {
-            // В реальном приложении здесь будет fetch или axios запрос
-            // к API переводчика (Yandex, Google, etc.)
-            
-            const languages = {
-                'en': 'English',
-                'ru': 'Russian',
-                'ua': 'Ukrainian',
-                'de': 'German',
-                'fr': 'French',
-                'es': 'Spanish'
-            };
-            
-            outputTextarea.value = `[${languages[targetLang]} Translation]: ${text}`;
-            
-            // Показываем кнопку копирования
-            copyButton.style.display = 'block';
-            
-            // Скрываем лоадер
-            loader.style.display = 'none';
-        }, 800);
-    }
-    
-    // Настройки (заглушка)
-    document.querySelector('.settings-icon').addEventListener('click', function() {
-        alert('Настройки будут реализованы в будущей версии');
-    });
-});
+    // Переводчик
+    async function Translation(text, targetLang) {
 
 
+        outputTextarea.value = text + " " + targetLang;
 
-// Добавьте эту функцию в ваш скрипт
-function adjustTextareaHeight(textarea) {
-    // Минимальная высота
-    const minHeight = 150;
-    
-    // Сброс высоты чтобы получить правильный scrollHeight
-    textarea.style.height = 'auto';
-    
-    // Установка новой высоты based on scrollHeight
-    const newHeight = Math.max(textarea.scrollHeight, minHeight);
-    textarea.style.height = newHeight + 'px';
-    
-    return newHeight;
-}
-
-// Добавьте этот обработчик событий в DOMContentLoaded
-inputTextarea.addEventListener('input', function() {
-    // Регулируем высоту textarea
-    adjustTextareaHeight(this);
-    
-    // Регулируем высоту контейнера перевода
-    if (outputTextarea.value) {
+        // Показываем кнопку копирования и убираем лоадер
+        copyButton.style.display = 'flex';
+        loader.style.display = 'none';
+        // изменяем размер текстового поля
         adjustTextareaHeight(outputTextarea);
     }
-    
-    // Остальная существующая логика...
-    if (inputTextarea.value.trim() !== '') {
-        clearButton.style.display = 'flex';
-        translateText();
-    } else {
-        clearButton.style.display = 'none';
-        outputTextarea.value = '';
-        copyButton.style.display = 'none';
-        // Восстанавливаем стандартную высоту
-        outputTextarea.style.height = 'auto';
-    }
-});
 
-// Также добавьте этот код для обработки изменения языка
-languageSelect.addEventListener('change', function() {
-    if (inputTextarea.value.trim() !== '') {
-        translateText();
-        // Обновляем высоту после перевода
-        setTimeout(() => {
-            adjustTextareaHeight(outputTextarea);
-        }, 1000);
-    }
+    // Переключение между переводчиком и настройками
+    settingsIcon.addEventListener('click', function() {
+        // переключить на переводчик
+        if (is_settings_open) {
+            // анимация иконки
+            settingsIcon.style.transform = 'rotate(0deg)';
+            // показать переводчик и скрыть настройки
+            translatorSection.style.display = 'flex';
+            languageSelect.style.display = 'flex';
+            settingsSection.style.display = 'none';
+            // изменение надписи сверху
+            title.textContent = 'перевести на:';
+            is_settings_open = false;
+        // переключить на настройки
+        } else {
+            // анимация иконки
+            settingsIcon.style.transform = 'rotate(45deg)';
+            // показать настройки и скрыть переводчик
+            translatorSection.style.display = 'none';
+            languageSelect.style.display = 'none';
+            settingsSection.style.display = 'flex';
+            // изменение надписи сверху
+            title.textContent = 'настройки';
+            is_settings_open = true;
+        }
+    });
 });
-
