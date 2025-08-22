@@ -47,7 +47,7 @@ header {
 
 /* Основная часть */
 main {
-    min-width: 300px;
+    min-width: 275px;
     min-height: 100px;
     flex: 0 1 auto;
     display: flex;
@@ -73,7 +73,7 @@ textarea {
     max-height: 200px;
     overflow-y: auto;
     border: none;
-    padding: 15px;
+    padding: 10px;
     resize: none;
     font-family: 'Montserrat', sans-serif;
     font-size: 14px;
@@ -165,6 +165,5 @@ option {
     flex-direction: column;
     padding: 15px;
     background-color: #1c1b22;
-    border-radius: 5px;
     font-size: 14px;
 }

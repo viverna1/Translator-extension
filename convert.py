@@ -11,7 +11,7 @@ else:
     print("Файл не найден, создаём новый")
 
 # Чёрный список (файлы и папки)
-blacklist = ["convert.py", ".git", "tree.py", "translator.xpi", "test"]
+blacklist = ["convert.py", ".git", "tree.py", "translator.xpi", ".test", ".gitignore"]
 
 with zipfile.ZipFile(file_path, "w") as archive:
     for root, dirs, files in os.walk("."):

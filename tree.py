@@ -37,7 +37,7 @@ def print_directory_tree(startpath, padding='', max_depth=None, current_depth=0,
 
 def main():
     import argparse
-    blacklist = ['.git', '__pycache__', 'tree.py']
+    blacklist = ['.git', '__pycache__', 'tree.py', '.test']
     
     parser = argparse.ArgumentParser(description='Вывод дерева директорий')
     parser.add_argument('path', nargs='?', default='.', help='Путь к директории (по умолчанию: текущая)')

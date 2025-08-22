@@ -6,7 +6,7 @@
     <title>Translator</title>
 
     <!-- Иконка сайта -->
-    <link rel="icon" href="icons/logo-48.png" type="image/png">
+    <link rel="icon" href="icons/logo.png" type="image/png">
 
     <!-- Мета-данные -->
     <meta name="author" content="v-v">
@@ -25,7 +25,7 @@
 <body>
     <!-- Шапка приложения -->
     <header>
-        <h1 id="title">перевести на:</h1>
+        <h1 id="title" data-i18n="translator_title"></h1>
 
         <!-- язык перевода -->                 
         <select id="language-select">
@@ -37,7 +37,7 @@
             <option value="es">Español</option>
         </select>
 
-        <!-- настройки -->
+        <!-- иконка настроек -->
         <div class="settings-icon">
             <i class="fas fa-cog"></i>
         </div>
@@ -49,7 +49,7 @@
         <!-- Ввод текста -->
         <div class="input-section">
             <div class="textarea-wrapper">
-                <textarea id="to-translate" placeholder="Введите текст..." autofocus></textarea>
+                <textarea id="to-translate" data-i18n-placeholder="enter_text" placeholder="Enter the text..." autofocus></textarea>
             </div>
 
 
@@ -63,7 +63,7 @@
         <!-- Результат перевода -->
         <div class="output-section">
 
-            <textarea id="translation" placeholder="Перевод" readonly></textarea>
+            <textarea id="translation" data-i18n-placeholder="translate" placeholder="Translate" readonly></textarea>
 
             <button class="copy-btn" id="copy-output">
                 <i class="far fa-copy"></i>
@@ -75,40 +75,13 @@
 
     <!-- Настройки -->
     <main id="settings" style="display: none;">
-        <form>
-            <fieldset>
-                <legend>Перевод</legend>        
-                <!-- выбор языка для перевода -->
-                <label for="settings-language-select">Язык перевода:</label>
-                <select id="settings-language-select">
-                    <option value="en" selected>English</option>
-                    <option value="ru">Русский</option>
-                    <option value="uk">Українська</option>
-                    <option value="de">Deutsch</option>
-                    <option value="fr">Français</option>
-                    <option value="es">Español</option>
-                </select>
-                <br>
-                
-                <!-- язык по умолчанию -->
-                <label for="default-language">Дополнительный язык:</label>
-                <select id="default-language">
-                    <option value="en">English</option>
-                    <option value="ru" selected>Русский</option>
-                    <option value="uk">Українська</option>
-                    <option value="de">Deutsch</option>
-                    <option value="fr">Français</option>
-                    <option value="es">Español</option>
-                </select>
-            </fieldset>
-
-            <fieldset>
-                <legend>Внешний вид</legend>
-        
-                <p>123</p>
-            </fieldset>
-        </form>
-        
+        <nav>
+            <ul>
+                <li>Основные</li>
+                <li>Внешний вид</li>
+                <li>Горячие клавиши</li>
+            </ul>
+        </nav>        
     </main>
 
     <!-- Скрипт приложения -->

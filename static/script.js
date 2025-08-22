@@ -5,13 +5,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const clearButton = document.getElementById('clear-input');
     const copyButton = document.getElementById('copy-output');
     const languageSelect = document.getElementById('language-select'); // язык перевода
-    const defaultLanguage = document.getElementById('default-language');
     const loader = document.getElementById('loader');
     const settingsIcon = document.querySelector('.settings-icon');
     const translatorSection = document.getElementById('translator');
     const settingsSection = document.getElementById('settings');
     const title = document.getElementById('title');
-    const settingsLanguageSelect = document.getElementById('settings-language-select');
 
     // Переменные
     let debounceTimer;
@@ -21,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
     /* ========== Textarea ========== */
     function adjustTextareaHeight(textarea) {
         textarea.style.height = 'auto';
-        textarea.style.height = (textarea.scrollHeight - 30) + 'px';
+        textarea.style.height = (textarea.scrollHeight - 20) + 'px';
     }
 
     inputTextarea.addEventListener('input', function() {
@@ -62,30 +60,19 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     /* ========== Синхронизация языков ========== */
-    function setLanguage(language) {
-        languageSelect.value = language;
-        settingsLanguageSelect.value = language;
-    }
-
     function swapLanguages(currentLanguage) {
-        const temp = defaultLanguage.value;
+        const temp = defaultLanguage;
         defaultLanguage.value = currentLanguage;
-        setLanguage(temp);
+        languageSelect.value = temp;
     
         // если после свапа оба значения одинаковые – исправляем
-        if (defaultLanguage.value === languageSelect.value) {
-            defaultLanguage.value = (defaultLanguage.value === "en") ? "ru" : "en";
-            setLanguage(temp);
+        if (defaultLanguage === languageSelect.value) {
+            defaultLanguage = (defaultLanguage === "en") ? userLang : "en";
+            languageSelect.value = temp;
         }
     }
 
     languageSelect.addEventListener('change', function() {
-        setLanguage(languageSelect.value);
-        if (inputTextarea.value.trim() !== '') translateText();
-    });
-
-    settingsLanguageSelect.addEventListener('change', function() {
-        setLanguage(settingsLanguageSelect.value);
         if (inputTextarea.value.trim() !== '') translateText();
     });
 
@@ -101,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // если переводчик определил язык так же, как targetLang
             if (detectedLang === targetLang && depth < 1) {
-                const temp = defaultLanguage.value;
+                const temp = defaultLanguage;
                 swapLanguages(targetLang);
                 return translate(text, temp, depth + 1);
             }
@@ -131,7 +118,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         debounceTimer = setTimeout(async () => {
             const translation = await translate(text, targetLang);
-            outputTextarea.value = translation || '';
+
+            outputTextarea.value = translation;
             adjustTextareaHeight(outputTextarea);
             resetTranslator();
         }, debounceDelay);
@@ -144,6 +132,42 @@ document.addEventListener('DOMContentLoaded', function() {
         clearTimeout(debounceTimer);
     }
 
+
+    // ========== изменение языка самного переводчика========== 
+    async function loadLocale(lang) {
+        const response = await fetch(`/locales/${lang}.json`);
+        const translations = await response.json();
+        return translations;
+    }
+    
+    async function applyTranslations(dict) {    
+        // Меняем обычный текст
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (dict[key]) el.textContent = dict[key];
+        });
+    
+        // Меняем placeholder
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+            const key = el.getAttribute('data-i18n-placeholder');
+            if (dict[key]) el.placeholder = dict[key];
+        });
+    }
+    
+
+    let currentDict = {}; // хранит текущие переводы
+    const existingLocalizations = ['en', 'ru', 'uk'];
+    const userLang = navigator.language.split('-')[0];
+    const langToLoad = existingLocalizations.includes(userLang) ? userLang : 'en';
+    
+    var defaultLanguage = userLang;
+    
+    loadLocale(langToLoad).then(dict => {
+        currentDict = dict;
+        applyTranslations(dict);
+    });
+
+
     /* ========== Переключение переводчик/настройки ========== */
     settingsIcon.addEventListener('click', function() {
         isSettingsOpen = !isSettingsOpen;
@@ -151,6 +175,8 @@ document.addEventListener('DOMContentLoaded', function() {
         translatorSection.style.display = isSettingsOpen ? 'none' : 'flex';
         languageSelect.style.display = isSettingsOpen ? 'none' : 'flex';
         settingsSection.style.display = isSettingsOpen ? 'flex' : 'none';
-        title.textContent = isSettingsOpen ? 'настройки' : 'перевести на:';
-    });
+
+        const titleKey = isSettingsOpen ? 'settings_title' : 'translator_title';
+        title.textContent = currentDict[titleKey] || title.textContent;
+    });    
 });
