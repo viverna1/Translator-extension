@@ -3,6 +3,7 @@
   "name": "Translator",
   "description": "Переводит текст",
   "version": "1.0.0",
+  "permissions": ["activeTab", "storage"],
   "homepage_url": "https://github.com/viverna1",
   "icons": {
     "32": "icons/logo-32.png",

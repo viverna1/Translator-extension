@@ -25,7 +25,7 @@ body {
 header {
     display: flex;
     align-items: center;
-    padding: 10px 15px;
+    padding: 7px 10px;
     background: rgba(255, 255, 255, 0.103);
     height: 20px;
 }
@@ -93,8 +93,8 @@ hr {
 /* Кнопки */
 .clear-btn, .copy-btn {
     position: absolute;
-    bottom: 10px;
     right: 10px;
+    top: 10px;
     background: none;
     border: none;
     cursor: pointer;
@@ -104,7 +104,7 @@ hr {
     display: none;
 }
 .clear-btn:hover, .copy-btn:hover {
-    color: #333;
+    color: #fff;
 }
 
 /* Лоадер */
@@ -112,8 +112,8 @@ hr {
     position: absolute;
     bottom: 10px;
     left: 15px;
-    border: 2px solid #f3f3f3;
-    border-top: 2px solid #3498db;
+    border: 2px solid #48474d;
+    border-top: 2px solid #fff;
     border-radius: 50%;
     width: 10px;
     height: 10px;
@@ -162,8 +162,63 @@ option {
 /* ====================== стили для настроек ====================== */
 #settings {
     display: none;
-    flex-direction: column;
-    padding: 15px;
     background-color: #1c1b22;
-    font-size: 14px;
+    font-size: 13px;
+}
+
+
+.switch {
+    display: block;
+    width: 100%;
+    padding: 10px 12px;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.3s ease;
+    user-select: none;
+    box-sizing: border-box;
+}
+.switch:hover {
+    background-color: #2c2c2e;
+}
+.switch input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+  
+  /* Стили для слайдера */
+.slider {
+    position: absolute;
+    right: 12px;
+    top: 50%;   
+    transform: translateY(-50%);
+    width: 45px;
+    height: 21px;
+    background-color: #747474;
+    border-radius: 20px; 
+    transition: 0.2s;
+    cursor: pointer;
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+        
+    left: 2.5px;
+    bottom: 12%;
+
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.2s;
+}
+  
+/* Стили когда чекбокс отмечен */
+input:checked + .slider {
+    background-color: #68afe9;
+}
+  
+input:checked + .slider:before {
+    transform: translateX(24px);
 }

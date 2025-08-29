@@ -75,15 +75,20 @@
 
     <!-- Настройки -->
     <main id="settings" style="display: none;">
-        <nav>
+        <nav style="display: none;">
             <ul>
                 <li>Основные</li>
                 <li>Внешний вид</li>
                 <li>Горячие клавиши</li>
             </ul>
-        </nav>        
+        </nav>     
+        
+        <label for="toggle-youtube-translator" class="switch" title="Включить или отключить переводчик в проигрывателе ютуба">Переводчик в ютубе
+            <input type="checkbox" id="toggle-youtube-translator">
+            <span class="slider"></span>
+        </label>
     </main>
-
+    
     <!-- Скрипт приложения -->
     <script src="static/script.js"></script>
 </body>
