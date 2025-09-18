@@ -125,6 +125,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const titleKey = isSettingsOpen ? 'settings_title' : 'translator_title';
         title.textContent = currentDict[titleKey] || title.textContent;
     }); 
+
+    // settingsIcon.click();
 });   
 
 
@@ -231,7 +233,6 @@ function addButton() {
 
         // Создаём попап
         const popup = document.createElement('div');
-        popup.id = 'buttonPopup';
         popup.style.position = 'absolute';
         popup.style.zIndex = '10000';
         popup.style.width = '250px';
@@ -266,8 +267,9 @@ function addButton() {
     rightControls.prepend(btn);
 }
 
-if (location.hostname.includes('youtube.com')) {
 
+// УБРАТЬ RETURN
+if (location.hostname.includes('youtube.com') && false) {
     // Постоянное наблюдение за DOM
     const observer = new MutationObserver(addButton);
     observer.observe(document.body, { childList: true, subtree: true });

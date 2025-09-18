@@ -27,7 +27,7 @@
     <header>
         <h1 id="title" data-i18n="translator_title"></h1>
 
-        <!-- язык перевода -->                 
+        <!-- язык перевода -->
         <select id="language-select">
             <option value="en" selected>English</option>
             <option value="ru">Русский</option>
@@ -87,9 +87,46 @@
             <input type="checkbox" id="toggle-youtube-translator">
             <span class="slider"></span>
         </label>
+
+        <label for="a1" class="switch" title="123">опция 1
+            <input type="checkbox" id="a1">
+            <span class="slider"></span>
+        </label>
+
+        <!-- разделитель между разделами -->
+        <div class="settings-section-separator">
+            <span class="line"></span>
+            <span class="text">Текст</span>
+            <span class="line"></span>
+        </div>
+        
+        <label for="a2" class="switch" title="123">опция 2
+            <input type="checkbox" id="a2">
+            <span class="slider"></span>
+        </label>
     </main>
     
     <!-- Скрипт приложения -->
     <script src="static/script.js"></script>
+
+    <div id="youtube-translator" style="display: none;">
+        <textarea id="youtube-input"  data-i18n-placeholder="enter_text" placeholder="Enter the text..." autofocus></textarea>
+        <hr>
+
+        <div id="youtube-output-container">
+            <textarea id="youtube-output"  data-i18n-placeholder="translate_to_youtube" placeholder="Translate to" readonly>
+ффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффф
+            </textarea>
+            
+            <select id="youtube-language-select">
+                <option value="en" selected>English</option>
+                <option value="ru">Русский</option>
+                <option value="uk">Українська</option>
+                <option value="de">Deutsch</option>
+                <option value="fr">Français</option>
+                <option value="es">Español</option>
+            </select>
+        </div>
+    </div>
 </body>
 </html>
